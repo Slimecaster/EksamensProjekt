@@ -9,7 +9,7 @@ public class MyUser {
     private double weight;
     private int height,age,gender,activityLevel,goal;
     private double amalie;
-
+    private String Magnus;
 
     public MyUser() {
 
