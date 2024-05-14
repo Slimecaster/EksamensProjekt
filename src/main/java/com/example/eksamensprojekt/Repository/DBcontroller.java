@@ -88,6 +88,26 @@ public class DBcontroller {
         String sql="DELETE FROM ingredient where ingredientId =?";
         jdbcTemplate.update(sql,ingredientId);
     }
+
+    public Dish createUpdateDish(Dish dish){
+        try{
+            if (dish.getDishId()==null){
+                String sql="INSERT INTO dish(name,type) VALUES (?,?)";
+                jdbcTemplate.update(sql,dish.getName(),dish.getType());
+            }else{
+                String sql="update dish set name=?,type=? where dishId="+String.valueOf(dish.getDishId());
+                jdbcTemplate.update(sql,dish.getName(),dish.getType());
+            }
+            return dish;
+        }catch(DataAccessException e){
+            throw new RuntimeException("Error creating ingredient", e);
+        }
+    }
+
+    public void deleteDishById(Long DishId){
+        String sql="DELETE FROM dish where dishId =?";
+        jdbcTemplate.update(sql,DishId);
+    }
     public List<Dish> findAllDishes(){
         try {
             String sql="SELECT * FROM dish";
@@ -95,11 +115,6 @@ public class DBcontroller {
         }catch(DataAccessException e){
             throw new RuntimeException("Error finding all dishes", e);
         }
-    }
-
-    public void deleteDishById(Long DishId){
-        String sql="DELETE FROM dish where dishId =?";
-        jdbcTemplate.update(sql,DishId);
     }
 
     public RowMapper<Dish> dishRowmapper(){
@@ -110,14 +125,7 @@ public class DBcontroller {
             return dish;
         };
     }
-    public List<Recipe> findAllRecipes(){
-        try {
-            String sql="SELECT * FROM recipe";
-            return jdbcTemplate.query(sql,recipeRowmapper());
-        }catch(DataAccessException e){
-            throw new RuntimeException("Error while finding all recipes",e);
-        }
-    }
+
 
     public Recipe createUpdateRecipe(Recipe recipe){
         try {
@@ -131,14 +139,20 @@ public class DBcontroller {
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
 
     public void deleteRecipeById(Long recipeId){
         String sql="DELETE FROM recipe where recipeId =?";
         jdbcTemplate.update(sql,recipeId);
+    }
+
+    public List<Recipe> findAllRecipes(){
+        try {
+            String sql="SELECT * FROM recipe";
+            return jdbcTemplate.query(sql,recipeRowmapper());
+        }catch(DataAccessException e){
+            throw new RuntimeException("Error while finding all recipes",e);
+        }
     }
 
     public RowMapper<Recipe> recipeRowmapper(){
