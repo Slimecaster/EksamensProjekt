@@ -8,6 +8,8 @@ public class MyUser {
     private String fname,sname,password,email,phoneNumber,role;
     private double weight;
     private int height,age,gender,activityLevel,goal;
+    private double amalie;
+
 
     public MyUser() {
 
