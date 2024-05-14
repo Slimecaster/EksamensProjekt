@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #343a40;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box; /* Include padding in the width calculation */
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            padding: 15px 20px;
+            background-color: #45a050;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box; /* Include padding in the width calculation */
+        }
+
+        button:hover {
+            background-color: #3b8d43;
+        }
+
+        .redirect-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        .redirect-button a {
+            padding: 15px 20px; /* Adjusted padding to match Log ind button */
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            text-decoration: none; /* Remove underline */
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box; /* Include padding in the width calculation */
+        }
+
+        .redirect-button a:hover {
+            background-color: #016edd;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Log ind</h2>
+
+    <form action="/login" method="POST">
+        <input type="email" name="email" id="email" placeholder="Din email" required>
+        <input type="password" name="password" id="password" placeholder="Dit kodeord" required>
+        <!-- Error message -->
+        <div class="error-message">
+            <!-- Display error message here -->
+            <p th:if="${param.error}" style="color: red;">Forkert email eller kodeord.</p>
+        </div>
+        <button type="submit">Log ind</button>
+    </form>
+
+    <!-- Redirect button -->
+    <div class="redirect-button">
+        <a href="/login/register/user">Opret bruger</a>
+    </div>
+</div>
+</body>
+</html>
