@@ -96,6 +96,12 @@ public class DBcontroller {
             throw new RuntimeException("Error finding all dishes", e);
         }
     }
+
+    public void deleteDishById(Long DishId){
+        String sql="DELETE FROM dish where dishId =?";
+        jdbcTemplate.update(sql,DishId);
+    }
+
     public RowMapper<Dish> dishRowmapper(){
         return (rs, rowNum) ->{
             Dish dish = new Dish();
@@ -112,6 +118,29 @@ public class DBcontroller {
             throw new RuntimeException("Error while finding all recipes",e);
         }
     }
+
+    public Recipe createUpdateRecipe(Recipe recipe){
+        try {
+            if (recipe.getRecipeId()==null){
+                String sql="INSERT INTO recipe(calories,protein,fat,carbs,description) VALUES (?,?,?,?,?)";
+                jdbcTemplate.update(sql,recipe.getCalories(),recipe.getProtein(),recipe.getFat(),recipe.getCarbs(),recipe.getDescription());
+            } else {
+                String sql="UPDATE recipe set calories=?,protein=?,fat=?,carbs=? where recipeId="+String.valueOf(recipe.getRecipeId());
+                jdbcTemplate.update(sql,recipe.getCalories(),recipe.getProtein(),recipe.getFat(),recipe.getCarbs(),recipe.getDescription());
+            } return recipe;
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+    public void deleteRecipeById(Long recipeId){
+        String sql="DELETE FROM recipe where recipeId =?";
+        jdbcTemplate.update(sql,recipeId);
+    }
+
     public RowMapper<Recipe> recipeRowmapper(){
         return(rs, rowNum) ->{
             Recipe recipe = new Recipe();
