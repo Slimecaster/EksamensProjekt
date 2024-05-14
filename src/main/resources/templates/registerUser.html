@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: rgba(184, 217, 184, 0.66);
             margin: 0;
             padding: 0;
             display: flex;
@@ -62,7 +62,7 @@
 
         button[type="submit"] {
             margin-top: 10px;
-            background-color: #4caf50;
+            background-color: rgba(69, 160, 80, 0.76);
             color: white;
             border: none;
             cursor: pointer;
@@ -95,7 +95,7 @@
 
         .redirect-button a {
             padding: 12px 20px; /* Adjusted padding to match Log ind button */
-            background-color: #007bff;
+            background-color: rgba(0, 123, 255, 0.74);
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -110,6 +110,16 @@
 
         .redirect-button a:hover {
             background-color: #016edd;
+        }
+
+        .activity-level label {
+            display: inline-block;
+            margin-right: 20px; /* Adjust spacing between radio buttons */
+            margin-bottom: 20px;
+        }
+        .Goals label{
+            display: inline-block;
+            margin-right: 20px;
         }
     </style>
 </head>
@@ -173,11 +183,28 @@
             <!-- Add more radio buttons as needed -->
         </div>
 
-        <label for="goal">Mål:</label>
-        <input type="text" id="goal" th:field="*{goal}"/>
+        <label>Dit mål:</label>
+        <div class="Goals">
+            <label>
+                <input type="radio" name="goal" value=0>
+                Tabe vægt
+            </label>
+            <label>
+                <input type="radio" name="goal" value=1>
+                Opbygge muskler
+            </label>
+            <label>
+                <input type="radio" name="goal" value=2>
+                Øge din vægt
+            </label>
+            <label>
+                <input type="radio" name="goal" value=3>
+                Holde vægten
+            </label>
+            <!-- Add more radio buttons as needed -->
+        </div>
 
-        <label for="role">Rolle:</label>
-        <input type="text" id="role" th:field="*{role}"/>
+
 
         <button type="submit">Opret bruger</button>
         <div class="redirect-button">
