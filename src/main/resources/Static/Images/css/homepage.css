@@ -52,33 +52,11 @@ header a:hover {
     margin-top: 700px;
 
 }
-.content {
-    background-color: #fff; /* Content background color */
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-top: 20px;
-}
-.subscribe-form {
-    text-align: center;
-}
-.subscribe-form input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-.subscribe-form input[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.subscribe-form input[type="submit"]:hover {
-    background-color: #45a049;
-}
+    .container2 {
+        max-width: 800px;
+        margin-left: 1500px;
+        margin-top: 400px;
+
+    }
+
 
