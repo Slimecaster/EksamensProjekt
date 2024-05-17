@@ -61,6 +61,8 @@ public class WebController {
         return "userCreatedSuccess";
     }
 
+    @GetMapping("/admin/homepage/createRecipe")
+    public String createRecipe() {return "createRecipe";}
 
 
 
