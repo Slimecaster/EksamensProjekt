@@ -81,8 +81,23 @@ public class Usecase {
         }return null;
     }
 
+    /*public Double caloriesForDifferentMeals(String email){
+        if (timeOfDayMeal="Breakfast"){
+            return calculateDailyCalories(email)*0.4;
+        }
+        else{
+            return calculateDailyCalories(email)*0.3;
+        }
+    }*/
 
-
+    /*public Double caloriesInMasterRecipe(){
+        double sum=0;
+        for(int i = 0; i<ingredientListForDish.size(); i++){
+            double ingredientCalories =ingredient.getCalories()/100*ingredient.getIngredientWeight();
+            sum+=ingredientCalories;
+        }
+        return sum;
+    }*/
 
 
 }
