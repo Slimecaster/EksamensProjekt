@@ -7,6 +7,8 @@ public class Recipe {
     private double calories, protein, fat, carbs;
     private String description;
     private ArrayList<Ingredient> ingredientListForDish=new ArrayList<>();
+    //private String timeOfDayMeal;
+    //En privat medlemsvariabel til at kunne bestemme om en ret er til morgenmad, frokost eller aftensmad.
 
     public Recipe() {
     }
