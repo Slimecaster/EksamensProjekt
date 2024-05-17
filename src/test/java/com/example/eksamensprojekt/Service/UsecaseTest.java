@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UsecaseTest {
     Usecase usecase=new Usecase();
-/*
+
     @Test
     public void testCalculateBMRForMale() {
         // Creating a male test user with weight 70kg, height 170cm, age 30, and gender 0 for male
@@ -15,7 +15,7 @@ class UsecaseTest {
 
         // Calculating BMR for male user
         Double expectedBMR = 10 * 70 + 6.25 * 170 - 5 * 30 + 5;
-        Double actualBMR = usecase.calculateBMR(maleUser);
+        Double actualBMR = usecase.calculateBMR(maleUser.getEmail());
 
         // Asserting that the calculated BMR matches the expected value
         assertEquals(expectedBMR, actualBMR);
@@ -28,12 +28,12 @@ class UsecaseTest {
 
         // Calculating BMR for female user
         Double expectedBMR = 10 * 60 + 6.25 * 160 - 5 * 25 - 161;
-        Double actualBMR = usecase.calculateBMR(femaleUser);
+        Double actualBMR = usecase.calculateBMR(femaleUser.getEmail());
 
         // Asserting that the calculated BMR matches the expected value
         assertEquals(expectedBMR, actualBMR);
     }
 
- */
+
 
 }

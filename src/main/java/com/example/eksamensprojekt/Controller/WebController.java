@@ -1,5 +1,6 @@
 package com.example.eksamensprojekt.Controller;
 
+import com.example.eksamensprojekt.Model.Dish;
 import com.example.eksamensprojekt.Model.MyUser;
 import com.example.eksamensprojekt.Repository.DBcontroller;
 import com.example.eksamensprojekt.Service.CustomUserDetailsService;
@@ -37,7 +38,8 @@ public class WebController {
     }
 
     @GetMapping("/user/homepage")
-    public String userHome() {
+    public String userHomepage(Model model) {
+        model.addAttribute("dishes", dbcontroller.findAllDishes());
         return "homepage_user";
     }
 
@@ -58,6 +60,8 @@ public class WebController {
     public String userCreatedSuccess() {
         return "userCreatedSuccess";
     }
+
+
 
 
 
