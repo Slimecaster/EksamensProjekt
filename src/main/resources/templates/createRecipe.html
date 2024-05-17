@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Update Recipe</title>
+</head>
+<body>
+<h1>Create/Update Recipe</h1>
+
+<!-- Form to submit recipe data to the server -->
+<form action="/saveRecipe" method="POST">
+
+    <!-- Hidden input to store recipeId; used to determine if the recipe is being created or updated -->
+    <input type="hidden" id="recipeId" name="recipeId" value="">
+
+    <!-- Input field for calories -->
+    <div>
+        <label for="calories">Calories:</label>
+        <input type="number" id="calories" name="calories" required>
+    </div>
+
+    <!-- Input field for protein -->
+    <div>
+        <label for="protein">Protein:</label>
+        <input type="number" id="protein" name="protein" required>
+    </div>
+
+    <!-- Input field for fat -->
+    <div>
+        <label for="fat">Fat:</label>
+        <input type="number" id="fat" name="fat" required>
+    </div>
+
+    <!-- Input field for carbs -->
+    <div>
+        <label for="carbs">Carbs:</label>
+        <input type="number" id="carbs" name="carbs" required>
+    </div>
+
+    <!-- Textarea for description -->
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+
+    <!-- Submit button to save the recipe -->
+    <button type="submit">Save Recipe</button>
+</form>
+</body>
+</html>
