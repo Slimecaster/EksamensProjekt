@@ -48,30 +48,40 @@ public class Usecase {
         System.out.println(BMR);
         return BMR;
     }
-    /*public Double maybeCalculateDailyCalories(){
-        return calculateBMR()* myUser.getActivityLevel();
-        //I teorien skal denne metode udregne en brugers daglige kalorieindtag ved at gange deres BMR med deres aktivitetsniveau
-    }*/
 
-   /* public Double calculateDailyCalories(MyUser myUser){
+    public Double calculateActivityLevel(String email){
         if (myUser.getActivityLevel()==0){
-            return calculateBMR(myUser)*1.2;
+            return calculateBMR(email)*1.2;
         }
         else if (myUser.getActivityLevel()==1) {
-            return calculateBMR(myUser)*1.375;
+            return calculateBMR(email)*1.375;
         }
         else if (myUser.getActivityLevel()==2) {
-            return calculateBMR(myUser)*1.55;
+            return calculateBMR(email)*1.55;
         }
         else if (myUser.getActivityLevel()==3) {
-            return calculateBMR(myUser)*1.725;
+            return calculateBMR(email)*1.725;
         }
         else if (myUser.getActivityLevel()==4) {
-            return calculateBMR(myUser)*1.9;
+            return calculateBMR(email)*1.9;
         } return null;
     }
+    public Double calculateDailyCalories(String email){
+        if(myUser.getGoal()==0){
+            return calculateActivityLevel(email)-500;
+        }
+        else if (myUser.getGoal()==1) {
+            return calculateActivityLevel(email)+500;
+        }
+        else if (myUser.getGoal()==2) {
+            return calculateActivityLevel(email);
+        }
+        else if (myUser.getGoal()==3) {
+            return calculateActivityLevel(email)+300;
+        }return null;
+    }
 
-    */
+
 
 
 
