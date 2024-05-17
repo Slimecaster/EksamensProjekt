@@ -172,7 +172,7 @@ public class DBcontroller {
             String sql="SELECT * FROM recipe where favorite="+1;
             return jdbcTemplate.query(sql,recipeRowmapper());
         } catch (Exception e) {
-            throw new RuntimeException("Error unable to find favorites :(",e);
+            throw new RuntimeException("Error unable to find favorites :'(",e);
         }
     }
 
