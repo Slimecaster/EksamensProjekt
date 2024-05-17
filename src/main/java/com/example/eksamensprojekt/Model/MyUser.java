@@ -11,7 +11,6 @@ public class MyUser {
 
 
 
-    private String MagnusTest;
 
 
     public MyUser() {
