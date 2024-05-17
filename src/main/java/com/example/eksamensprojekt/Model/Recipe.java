@@ -9,6 +9,9 @@ public class Recipe {
     private ArrayList<Ingredient> ingredientListForDish=new ArrayList<>();
     //private String timeOfDayMeal;
     //En privat medlemsvariabel til at kunne bestemme om en ret er til morgenmad, frokost eller aftensmad.
+    //private double ingredientWeight
+    //En private medlemsvariabel, der skal bruges i omskrivning af opskrifter
+
 
     public Recipe() {
     }
