@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: rgba(184, 217, 184, 0.66);
             margin: 0;
             padding: 0;
             display: flex;
@@ -36,7 +36,10 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"]{
             width: calc(100% - 16px);
             padding: 10px;
             margin-bottom: 16px;
@@ -62,7 +65,7 @@
 
         button[type="submit"] {
             margin-top: 10px;
-            background-color: #4caf50;
+            background-color: rgba(69, 160, 80, 0.76);
             color: white;
             border: none;
             cursor: pointer;
@@ -95,7 +98,7 @@
 
         .redirect-button a {
             padding: 12px 20px; /* Adjusted padding to match Log ind button */
-            background-color: #007bff;
+            background-color: rgba(0, 123, 255, 0.74);
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -111,6 +114,16 @@
         .redirect-button a:hover {
             background-color: #016edd;
         }
+
+        .activity-level label {
+            display: inline-block;
+            margin-right: 20px; /* Adjust spacing between radio buttons */
+            margin-bottom: 20px;
+        }
+        .Goals label{
+            display: inline-block;
+            margin-right: 20px;
+        }
     </style>
 </head>
 <body>
@@ -119,28 +132,33 @@
 <div class="container">
     <form action="/login/register/user" th:action="@{/login/register/user}" th:object="${MyUser}" method="post">
         <label for="fname">Fornavn:</label>
-        <input type="text" id="fname" th:field="*{fname}"/>
+        <input type="text" id="fname" th:field="*{fname}" required/>
 
         <label for="sname">Efternavn:</label>
-        <input type="text" id="sname" th:field="*{sname}"/>
+        <input type="text" id="sname" th:field="*{sname}" required/>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}"/>
+        <input type="password" id="password" th:field="*{password}" required
+               pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}" title="Dit kodeord skal indeholde mindst 1 stort og småt bogstav, være mindst 8 tegn langt, og indeholde mindst 1 tal"/>
 
         <label for="email">Email:</label>
-        <input type="text" id="email" th:field="*{email}"/>
+        <input type="email" id="email" th:field="*{email}" required/>
 
         <label for="phoneNumber">Telefonnummer:</label>
-        <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/>
+        <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" required
+        pattern="[1-9\s]{8,11}" title="Indtast et gyldigt telefonnummer"/>
 
-        <label for="weight">Vægt:</label>
-        <input type="text" id="weight" th:field="*{weight}"/>
+        <label for="weight">Vægt (kg):</label>
+        <input type="number" id="weight" th:field="*{weight}"
+               min="2" max="650" required/>
 
-        <label for="height">Højde:</label>
-        <input type="text" id="height" th:field="*{height}"/>
+        <label for="height">Højde (cm):</label>
+        <input type="number" id="height" th:field="*{height}"
+        min="53" max="280" required/>
 
         <label for="age">Alder:</label>
-        <input type="text" id="age" th:field="*{age}"/>
+        <input type="number" id="age" th:field="*{age}"
+        min="12" max="125" required/>
 
         <label for="gender">Køn:</label>
         <select id="gender" th:field="*{gender}">
@@ -173,11 +191,28 @@
             <!-- Add more radio buttons as needed -->
         </div>
 
-        <label for="goal">Mål:</label>
-        <input type="text" id="goal" th:field="*{goal}"/>
+        <label>Dit mål:</label>
+        <div class="Goals">
+            <label>
+                <input type="radio" name="goal" value=0>
+                Tabe vægt
+            </label>
+            <label>
+                <input type="radio" name="goal" value=1>
+                Opbygge muskler
+            </label>
+            <label>
+                <input type="radio" name="goal" value=2>
+                Øge din vægt
+            </label>
+            <label>
+                <input type="radio" name="goal" value=3>
+                Holde vægten
+            </label>
+            <!-- Add more radio buttons as needed -->
+        </div>
 
-        <label for="role">Rolle:</label>
-        <input type="text" id="role" th:field="*{role}"/>
+
 
         <button type="submit">Opret bruger</button>
         <div class="redirect-button">

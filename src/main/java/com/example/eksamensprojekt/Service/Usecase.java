@@ -9,6 +9,7 @@ import com.example.eksamensprojekt.Model.MyUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Usecase {
@@ -28,23 +29,31 @@ public class Usecase {
         return dbController.findAllRecipes();
     }
 
-    public Double calculateBMR(MyUser myUser){
+    public Double calculateBMR(String email) {
         //I teorien skal denne metode udregne en brugers BMR ud fra deres køn. 0 er mand, 1 er kvinde
-        if(myUser.getGender()==0){
-            Double menBMR=((10* myUser.getWeight())+(6.25* myUser.getHeight())-(5* myUser.getAge())+5);
-            return menBMR;
+        Optional<MyUser> optionalUser = dbController.findUserByEmail(email);
+        double BMR = 0;
+
+        // Check if user is present and calculate BMR accordingly
+        if (optionalUser.isPresent()) {
+            MyUser myUser = optionalUser.get();
+
+            if (myUser.getGender() == 0) {
+                BMR = ((10 * myUser.getWeight()) + (6.25 * myUser.getHeight()) - (5 * myUser.getAge()) + 5);
+            } else {
+                BMR = ((10 * myUser.getWeight()) + (6.25 * myUser.getHeight()) - (5 * myUser.getAge()) - 161);
+
+            }
         }
-        else{
-            Double womenBMR=((10* myUser.getWeight())+(6.25* myUser.getHeight())-(5* myUser.getAge())-161);
-            return womenBMR;
-        }
+        System.out.println(BMR);
+        return BMR;
     }
     /*public Double maybeCalculateDailyCalories(){
         return calculateBMR()* myUser.getActivityLevel();
         //I teorien skal denne metode udregne en brugers daglige kalorieindtag ved at gange deres BMR med deres aktivitetsniveau
     }*/
 
-    public Double calculateDailyCalories(MyUser myUser){
+   /* public Double calculateDailyCalories(MyUser myUser){
         if (myUser.getActivityLevel()==0){
             return calculateBMR(myUser)*1.2;
         }
@@ -61,6 +70,8 @@ public class Usecase {
             return calculateBMR(myUser)*1.9;
         } return null;
     }
+
+    */
 
 
 

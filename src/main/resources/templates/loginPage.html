@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: rgba(184, 217, 184, 0.66);
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,9 +16,20 @@
             min-height: 100vh;
         }
 
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px; /* Adjust as needed */
+        }
+
+        .image-container img {
+            max-width: 200px; /* Adjust the image size as needed */
+            margin-bottom: 10px; /* Add some space between image and heading */
+        }
+
         .container {
             max-width: 400px;
-            background-color: #ffffff;
+            margin-left: 50px;
+            background-color: rgba(255, 255, 255, 0.93);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -37,7 +48,7 @@
             border-radius: 5px;
             margin-bottom: 20px;
             width: 100%;
-            box-sizing: border-box; /* Include padding in the width calculation */
+            box-sizing: border-box;
             font-size: 16px;
             transition: border-color 0.3s ease;
         }
@@ -50,7 +61,7 @@
 
         button {
             padding: 15px 20px;
-            background-color: #45a050;
+            background-color: rgba(69, 160, 80, 0.76);
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -58,7 +69,7 @@
             width: 100%;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            box-sizing: border-box; /* Include padding in the width calculation */
+            box-sizing: border-box;
         }
 
         button:hover {
@@ -70,43 +81,44 @@
             margin-top: 20px;
         }
 
-
         .redirect-button a {
-            padding: 15px 20px; /* Adjusted padding to match Log ind button */
-            background-color: #007bff;
+            padding: 15px 20px;
+            background-color: rgba(0, 123, 255, 0.74);
             color: #ffffff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
             font-size: 16px;
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
             display: inline-block;
             transition: background-color 0.3s ease;
-            box-sizing: border-box; /* Include padding in the width calculation */
+            box-sizing: border-box;
         }
 
         .redirect-button a:hover {
             background-color: #016edd;
         }
+
     </style>
 </head>
 <body>
+<div class="image-container">
+    <img src="../Images/minkostplan-logo.png" alt="Min Kostplan logo">
+    <h2>Din billige vej til en skræddersyet kostplan</h2>
+</div>
 <div class="container">
     <h2>Log ind</h2>
 
     <form action="/login" method="POST">
-        <input type="email" name="email" id="email" placeholder="Din email" required>
-        <input type="password" name="password" id="password" placeholder="Dit kodeord" required>
-        <!-- Error message -->
+        <input type="email" name="email" id="email" placeholder="Indtast din email" required>
+        <input type="password" name="password" id="password" placeholder="Indtast dit kodeord" required>
         <div class="error-message">
-            <!-- Display error message here -->
             <p th:if="${param.error}" style="color: red;">Forkert email eller kodeord.</p>
         </div>
         <button type="submit">Log ind</button>
     </form>
 
-    <!-- Redirect button -->
     <div class="redirect-button">
         <a href="/login/register/user">Opret bruger</a>
     </div>
