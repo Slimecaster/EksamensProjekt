@@ -116,7 +116,7 @@ public class DBcontroller {
             throw new RuntimeException("Error finding all dishes", e);
         }
     }
-    public List<Dish> show21Recipes(){
+    public List<Recipe> show21Recipes(){
         String sql="SELECT * FROM recipe";
         return jdbcTemplate.query(sql,dishRowmapper());
     }
