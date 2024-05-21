@@ -118,7 +118,7 @@ public class DBcontroller {
     }
     public List<Recipe> show21Recipes(){
         String sql="SELECT * FROM recipe";
-        return jdbcTemplate.query(sql,dishRowmapper());
+        return jdbcTemplate.query(sql,recipeRowmapper());
     }
 
     public RowMapper<Dish> dishRowmapper(){
