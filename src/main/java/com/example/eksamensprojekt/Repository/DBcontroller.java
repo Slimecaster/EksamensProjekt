@@ -173,7 +173,8 @@ public class DBcontroller {
 
     public List<Recipe> findFavoriteRecipes(){
         try {
-            String sql="SELECT * FROM recipe where favorite="+1;
+            //finder alle opsrifter hvor favorit variblen i databsen er =1, aka sand
+            String sql="SELECT * FROM recipe where favorite=1";
             return jdbcTemplate.query(sql,recipeRowmapper());
         } catch (Exception e) {
             throw new RuntimeException("Error unable to find favorites :'(",e);
