@@ -81,24 +81,35 @@ public class Usecase {
         }return null;
     }
 
-    /*public Double caloriesForDifferentMeals(String email){
-        if (timeOfDayMeal="Breakfast"){
+    public Double caloriesForDifferentMeals(String email){
+        //Bruger .equals da vi vil sammenligne Strings
+        if (recipe.getTimeOfDayMeal().equals("Breakfast")){
             return calculateDailyCalories(email)*0.4;
         }
         else{
+            //Dinner og Lunch skal begge ganges med 0.3
             return calculateDailyCalories(email)*0.3;
         }
-    }*/
+    }
 
-    /*public Double caloriesInMasterRecipe(){
+    public Double caloriesInMasterRecipe(){
+        //Skal måske have en liste fra recipe over ingredienser som parameter
         double sum=0;
         for(int i = 0; i<ingredientListForDish.size(); i++){
-            double ingredientCalories =ingredient.getCalories()/100*ingredient.getIngredientWeight();
+            double ingredientCalories =ingredient.getCalories()/100*recipe.getIngredientWeight();
             sum+=ingredientCalories;
         }
         return sum;
-    }*/
+    }
 
+    /*public Double calculateQuantityRatio(){
+        //Skal have samme liste som caloriesInMasterRecipe
+        double sum=0;
+        for(int i = 0; i<ingredientListForDish.size(); i++){
+            caloriesPerIngredientPerMasterRecipe/caloriesInMasterRecipe()
+        }
+        return sum;
+    }*/
 
 }
 
