@@ -5,6 +5,7 @@ import com.example.eksamensprojekt.Model.MyUser;
 import com.example.eksamensprojekt.Model.Recipe;
 import com.example.eksamensprojekt.Repository.DBcontroller;
 import com.example.eksamensprojekt.Service.CustomUserDetailsService;
+import com.example.eksamensprojekt.Service.Usecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,12 +23,14 @@ public class WebController {
     private final CustomUserDetailsService userDetailsService;
     private final DBcontroller dbcontroller;
     private final PasswordEncoder passwordEncoder;
+    private final Usecase usecase;
 
     @Autowired
-    public WebController(CustomUserDetailsService userDetailsService, DBcontroller dbcontroller, PasswordEncoder passwordEncoder) {
+    public WebController(CustomUserDetailsService userDetailsService, DBcontroller dbcontroller, PasswordEncoder passwordEncoder, Usecase usecase) {
         this.userDetailsService = userDetailsService;
         this.dbcontroller = dbcontroller;
         this.passwordEncoder = passwordEncoder;
+        this.usecase = usecase;
     }
     @GetMapping("/login")
     public String login() {
@@ -97,7 +100,7 @@ public class WebController {
     @PostMapping("/user/delete")
     public String deleteUserProfile(@RequestParam("email") String email, Model model) {
         // Call the repository method to delete the user by email
-        dbcontroller.deleteUserByEmail(email);
+        usecase.deleteUserByEmail(email);
         // Redirect to a confirmation page or another appropriate page
         return "redirect:/logout";
     }

@@ -25,8 +25,8 @@ public class Usecase {
     public MyUser createUpdateUser(MyUser myUser){
         return dbController.createUpdateUser(myUser);
     }
-    public void deleteUserById(Long userId){
-        dbController.deleteUserById(userId);
+    public void deleteUserByEmail(String email){
+        dbController.deleteUserByEmail(email);
     }
 
     public Optional<MyUser> findUserByEmail(String email) {
