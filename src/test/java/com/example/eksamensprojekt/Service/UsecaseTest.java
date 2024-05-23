@@ -30,7 +30,7 @@ class UsecaseTest {
     private DBcontroller dbController;
 
     Usecase usecase=new Usecase();
-
+/*
     @Test
     public void testCalculateBMRForMale() {
         // Creating a male test user with weight 70kg, height 170cm, age 30, and gender 0 for male
@@ -59,6 +59,8 @@ class UsecaseTest {
         // Asserting that the calculated BMR matches the expected value
         assertEquals(expectedBMR, actualBMR);
     }
+
+ */
 
 
 

@@ -1,17 +1,137 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Homepage</title>
-</head>
-<body>
-<h1>Welcome to the User Homepage</h1>
-<h2>List of Dishes</h2>
-<ul>
-    <li th:each="dish : ${dishes}">
-        <span th:text="'ID: ' + ${dish.dishId} + ', Name: ' + ${dish.name} + ', Type: ' + ${dish.type}"></span>
-    </li>
-</ul>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Homepage</title>
+        <style>
+            html {
+                box-sizing: border-box;
+            }
+
+            *, *::before, *::after {
+                box-sizing: inherit;
+            }
+
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                font-family: Lato, serif;
+                background-color: rgba(239,249,240,255);
+                color: #333;
+            }
+
+            header {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+            }
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo-container a {
+                display: flex;
+                align-items: center;
+                padding: 0;
+                border: none;
+                text-decoration: none;
+                background: none;
+                outline: none;
+            }
+
+            .logo-container img {
+                width: 100px;
+                height: auto;
+                display: block;
+            }
+
+            .header-right {
+                display: flex;
+                align-items: center;
+            }
+
+            .user-image-container {
+                margin-left: 20px;
+            }
+
+            .user-image-container a {
+                display: flex;
+                align-items: center;
+                padding: 0;
+                border: none;
+                text-decoration: none;
+                background: none;
+                outline: none;
+            }
+
+            .user-image-container img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+
+            header a.login-button {
+                color: white;
+                padding: 10px 20px;
+                background-color: darkslategray;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+
+            header a.login-button:hover {
+                background-color: #2c3e50;
+            }
+
+            .info-container {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .info-container h3 {
+                margin: 0;
+            }
+
+            .info-container h5 {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+    <header>
+        <div class="logo-container">
+            <a href="/user/homepage">
+                <img src="../Images/minkostplan-logo.png" alt="Min Kostplan logo" class="logo">
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="/logout" class="login-button">log ud</a> <!-- Log in button -->
+            <div class="user-image-container">
+                <a href="/user/profile">
+                    <img src="../Images/user-image.png" alt="User Image">
+                </a>
+            </div>
+        </div>
+    </header>
+    <h1>Welcome to the User Homepage</h1>
+    <h2>List of Dishes</h2>
+    <ul>
+        <li th:each="dish : ${dishes}">
+            <span th:text="'ID: ' + ${dish.dishId} + ', Name: ' + ${dish.name} + ', Type: ' + ${dish.type}"></span>
+        </li>
+    </ul>
+    </body>
+    </html>

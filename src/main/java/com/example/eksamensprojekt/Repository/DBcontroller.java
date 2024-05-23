@@ -36,9 +36,9 @@ public class DBcontroller {
             throw new RuntimeException("Error creating user", e);
         }
     }
-    public void deleteUserById(Long userId){
-        String sql="DELETE FROM user where userId =?";
-        jdbcTemplate.update(sql,userId);
+    public void deleteUserByEmail(String email){
+        String sql="DELETE FROM user where email =?";
+        jdbcTemplate.update(sql,email);
     }
 
     public Optional<MyUser> findUserByEmail(String email) {

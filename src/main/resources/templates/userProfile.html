@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Homepage</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Lato, serif;
+            background-color: rgba(239,249,240,255);
+            color: #333;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container a {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            border: none;
+            text-decoration: none;
+            background: none;
+            outline: none;
+        }
+
+        .logo-container img {
+            width: 100px;
+            height: auto;
+            display: block;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-image-container {
+            margin-left: 20px;
+        }
+
+        .user-image-container a {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            border: none;
+            text-decoration: none;
+            background: none;
+            outline: none;
+        }
+
+        .user-image-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        header a.login-button {
+            color: white;
+            padding: 10px 20px;
+            background-color: darkslategray;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        header a.login-button:hover {
+            background-color: #2c3e50;
+        }
+
+        .info-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .info-container h3 {
+            margin: 0;
+        }
+
+        .info-container h5 {
+            margin: 0;
+        }
+
+        .profile-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .profile-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-container h1 {
+            margin: 10px 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .profile-container p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .delete-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #ff3333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <a href="/user/homepage">
+            <img src="../Images/minkostplan-logo.png" alt="Min Kostplan logo" class="logo">
+        </a>
+    </div>
+    <div class="header-right">
+        <a href="/logout" class="login-button">log ud</a>
+        <div class="user-image-container">
+            <a href="/user/profile">
+                <img src="../Images/user-image.png" alt="User Image">
+            </a>
+        </div>
+    </div>
+</header>
+<div class="profile-container">
+    <!-- User profile details -->
+    <h1 th:text="${user.fname + ' ' + user.sname}">User Name</h1>
+    <p th:text="'Email: ' + ${user.email}">Email: user@example.com</p>
+    <p th:text="'Phone: ' + ${user.phoneNumber}">Phone: 1234567890</p>
+    <p th:text="'Weight: ' + ${user.weight} + ' kg'">Weight: 70 kg</p>
+    <p th:text="'Height: ' + ${user.height} + ' cm'">Height: 180 cm</p>
+    <p th:text="'Age: ' + ${user.age}">Age: 25</p>
+    <p th:text="'Gender: ' + (${user.gender} == 1 ? 'Male' : 'Female')">Gender: Male</p>
+    <p>
+        Activity Level:
+        <span th:switch="${user.activityLevel}">
+            <span th:case="0">Sedentary</span>
+            <span th:case="1">Lightly Active</span>
+            <span th:case="2">Moderately Active</span>
+            <span th:case="3">Very Active</span>
+            <span th:case="4">Extra Active</span>
+        </span>
+    </p>
+    <p>
+        Goal:
+        <span th:switch="${user.goal}">
+            <span th:case="0">Lose Weight</span>
+            <span th:case="1">Build Muscle</span>
+            <span th:case="2">Increase Weight</span>
+            <span th:case="3">Maintain Weight</span>
+        </span>
+    </p>
+    <form th:action="@{/user/delete}" method="post" onsubmit="return confirm('Are you sure you want to delete your profile? This action cannot be undone.')">
+        <!-- Hidden input field to pass the email value -->
+        <input type="hidden" name="email" th:value="${user.email}" />
+        <button class="delete-button" type="submit">Delete Profile</button>
+    </form>
+</div>
+</body>
+</html>

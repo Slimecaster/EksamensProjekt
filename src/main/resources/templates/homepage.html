@@ -4,145 +4,198 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Min Kostplan</title>
-
     <style>
-        /* Base styles for the body */
+        html {
+            box-sizing: border-box;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
         body {
-            font-family: Lato, serif; /* Set the font family */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
-            background-color: rgba(184, 217, 184, 0.66); /* Set background color */
-            color: #333; /* Set text color */
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column; /* Align children in a column */
-            align-items: center; /* Center children horizontally */
+            display: flex;
+            flex-direction: column;
+            font-family: Lato, serif;
+            background-color: rgba(239,249,240,255);
+            color: #333;
         }
 
-        /* Styles for the header */
         header {
-            width: 100%; /* Make header full width */
-            display: flex; /* Use flexbox for layout */
-            justify-content: flex-end; /* Align link to the right */
-            padding: 10px 20px; /* Add padding */
-            background-color: darkslategray; /* Set background color */
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.2); /* Thin line to separate header */
         }
 
-        /* Styles for the login link */
-        header a {
-            color: white; /* Set text color */
-            padding: 10px 20px; /* Add padding for button-like appearance */
-            background-color: darkslategray; /* Set background color */
-            border: none; /* Remove border */
-            border-radius: 5px; /* Round the corners */
-            text-decoration: none; /* Remove underline */
-        }
-
-        /* Hover effect for the login link */
-        header a:hover {
-            background-color: #2c3e50; /* Darken background on hover */
-        }
-
-        /* Container for main content */
-        .content {
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column; /* Align children in a column */
-            padding: 20px; /* Add padding */
-            width: 100%; /* Full width */
-            max-width: 1200px; /* Max width for large screens */
-            margin-bottom: 35px;
-        }
-
-        /* Container for logo */
         .logo-container {
-            display: flex; /* Use flexbox for layout */
-            justify-content: flex-start; /* Align logo to the left */
-            width: 100%; /* Full width */
-            padding: 20px; /* Add padding */
-            margin-top: 60px;
+            display: flex;
+            align-items: center;
         }
 
-        /* Container for text content and dish image */
+        .logo-container img {
+            width: 100px;
+            height: auto;
+        }
+
+        .logo-container p {
+            margin-left: 10px;
+            font-size: 0.8em;
+            line-height: 1.5;
+            max-width: 200px; /* Ensure the text wraps */
+        }
+
+        header a {
+            color: white;
+            padding: 10px 20px;
+            background-color: darkslategray;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            background-color: #2c3e50;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .text-and-image {
-            display: flex; /* Use flexbox for layout */
-            justify-content: space-between; /* Space out text and image */
-            align-items: flex-start; /* Align items to the top */
-            width: 100%; /* Full width */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
         }
 
-        /* Text container styles */
+        .join-today-box {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #2c3e50;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .join-today-box h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .join-today-box p {
+            margin: 10px 0;
+        }
+
+        .join-today-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .join-today-box a:hover {
+            background-color: darkslategray;
+        }
+
         .text-container {
-            flex: 1; /* Take up available space */
-            margin-right: 20px; /* Add margin to the right */
+            text-align: left;
+            flex: 1;
         }
 
-        /* Image styles */
         .dish-image {
-            max-width: 400px; /* Set maximum width */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 10px; /* Round the corners */
-            margin-top: -350px; /* Move the image 20px upwards */
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin-left: 20px;
+            margin-top: 20px;
         }
 
-        /* Styles for the footer */
-        footer {
-            width: 100%; /* Full width */
-            padding: 10px 0; /* Add padding */
-            background-color: darkslategray; /* Set background color */
-            color: white; /* Set text color */
-            text-align: center; /* Center text */
-        }
-
-        /* Media query for smaller screens */
-        @media (max-width: 767px) {
+        @media (min-width: 768px) {
             .text-and-image {
-                flex-direction: column; /* Stack text and image vertically */
-                align-items: center; /* Center items */
+                flex-direction: row;
+                align-items: flex-start;
             }
 
             .text-container {
-                margin-right: 0; /* Remove right margin */
-                margin-bottom: 20px; /* Add bottom margin */
+                margin-right: 20px;
             }
 
             .dish-image {
-                margin-top: 0; /* Reset margin for small screens */
+                margin-left: 20px;
             }
         }
-    </style>
 
+        footer {
+            width: 100%;
+            padding: 10px 20px;
+            border-top: 1px solid rgba(51, 51, 51, 0.2); /* Thin line to separate footer */
+            color: #333;
+            text-align: center;
+        }
+
+        .info-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .info-container h3 {
+            margin: 0;
+        }
+
+        .info-container h5 {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-
-<!-- Header section with login link -->
 <header>
-    <a href="/login">Log ind</a>
-</header>
-
-<!-- Main content container -->
-<div class="content">
-    <!-- Logo container aligned to the left -->
     <div class="logo-container">
         <img src="../Images/minkostplan-logo.png" alt="Min Kostplan logo" class="logo">
+        <p>Billig, hurtig og overskuelig kostplan til hverdagen</p>
     </div>
-
-    <!-- Text content and dish image container -->
+    <a href="/login">Log ind</a> <!-- Log in button -->
+</header>
+<div class="content">
     <div class="text-and-image">
-        <!-- Text content -->
         <div class="text-container">
             <h1>Din billige vej til en skræddersyet kostplan</h1>
             <h2>Prøv de første 30 dage gratis</h2>
             <h3>Få ugentlige kostplaner, skræddersyet til dine mål i de første 30 dage til 0 kr, helt uden binding. Herefter kun 49 kr. om ugen</h3>
+            <div class="join-today-box">
+                <h2>Tilmeld dig i dag</h2>
+                <p>Start din rejse mod en sundere livsstil. <br> Tilmeld dig i dag og få de første 30 dage gratis!</p>
+                <a href="/login/register/user">Tilmeld dig nu</a>
+            </div>
         </div>
-
-        <!-- Dish image -->
         <img src="../Images/Kostplan-ret.png" alt="En lækker ret :)" class="dish-image">
     </div>
 </div>
-
-<!-- Footer section -->
 <footer>
-    <div class="footer">
-        <!-- Footer content can be added here -->
+    <div class="info-container">
+        <h3>Info</h3>
+        <h5>Farimagsvej 45, 4700 Næstved</h5>
+        <h5>kontakt@minkostplan.com</h5>
     </div>
 </footer>
 </body>
