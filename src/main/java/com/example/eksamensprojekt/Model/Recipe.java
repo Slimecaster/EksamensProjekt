@@ -7,25 +7,25 @@ public class Recipe {
     private double calories, protein, fat, carbs;
     private String description;
     private ArrayList<Ingredient> ingredientListForDish=new ArrayList<>();
-    //private String timeOfDayMeal;
+    private String timeOfDayMeal;
     //En privat medlemsvariabel til at kunne bestemme om en ret er til morgenmad, frokost eller aftensmad.
-    //private double ingredientWeight
+    private double ingredientWeight;
     //En private medlemsvariabel, der skal bruges i omskrivning af opskrifter
 
 
     public Recipe() {
     }
 
-    public Recipe(Long recipeId, double calories, double protein, double fat, double carbs, String description) {
-        this.recipeId = recipeId;
-        this.calories = calories;
-        this.protein = protein;
-        this.fat = fat;
-        this.carbs = carbs;
+    public Recipe(String timeOfDayMeal, double ingredientWeight, String description, double carbs, double fat, double protein, double calories, Long recipeId) {
+        this.timeOfDayMeal = timeOfDayMeal;
+        this.ingredientWeight = ingredientWeight;
         this.description = description;
+        this.carbs = carbs;
+        this.fat = fat;
+        this.protein = protein;
+        this.calories = calories;
+        this.recipeId = recipeId;
     }
-
-
 
     public double calculateCalories(ArrayList<Ingredient> ingredientList){
         double totalCalories=0.0;
@@ -87,6 +87,22 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getIngredientWeight() {
+        return ingredientWeight;
+    }
+
+    public void setIngredientWeight(double ingredientWeight) {
+        this.ingredientWeight = ingredientWeight;
+    }
+
+    public String getTimeOfDayMeal() {
+        return timeOfDayMeal;
+    }
+
+    public void setTimeOfDayMeal(String timeOfDayMeal) {
+        this.timeOfDayMeal = timeOfDayMeal;
     }
 }
 
