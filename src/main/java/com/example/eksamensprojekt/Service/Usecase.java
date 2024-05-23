@@ -1,5 +1,6 @@
 package com.example.eksamensprojekt.Service;
 
+import com.example.eksamensprojekt.Model.Dish;
 import com.example.eksamensprojekt.Model.Ingredient;
 import com.example.eksamensprojekt.Model.Recipe;
 import com.example.eksamensprojekt.Repository.DBcontroller;
@@ -21,13 +22,49 @@ public class Usecase {
     private Ingredient ingredient;
     private ArrayList<Ingredient> ingredientListForDish;
 
-    public void createUpdateUser(MyUser myUser){
-        dbController.createUpdateUser(myUser);
+    public MyUser createUpdateUser(MyUser myUser){
+        return dbController.createUpdateUser(myUser);
+    }
+    public void deleteUserById(Long userId){
+        dbController.deleteUserById(userId);
     }
 
+    public Optional<MyUser> findUserByEmail(String email) {
+        return dbController.findUserByEmail(email);
+    }
+    public Ingredient createUpdateIngredient(Ingredient ingredient){
+        return dbController.createUpdateIngredient(ingredient);
+    }
+    public void deleteIngredientById(Long ingredientId){
+        dbController.deleteIngredientById(ingredientId);
+    }
+    public Dish createUpdateDish(Dish dish){
+        return dbController.createUpdateDish(dish);
+    }
+    public void deleteDishById(Long dishId){
+        dbController.deleteDishById(dishId);
+    }
+    public List<Dish> findAllDishes(){
+        return dbController.findAllDishes();
+    }
+    public List<Recipe> show21Recipes(){
+        //denne her er ikke færdig i sql
+        return dbController.show21Recipes();
+    }
+    public Recipe createUpdateRecipe(Recipe recipe){
+        return dbController.createUpdateRecipe(recipe);
+    }
+    public void deleteRecipeById(Long recipeId){
+        dbController.deleteRecipeById(recipeId);
+    }
     public List<Recipe> findAllRecipes(){
         return dbController.findAllRecipes();
     }
+    public List<Recipe> findFavoriteRecipes(){
+        //denne her er ikke færdig i sql
+        return dbController.findFavoriteRecipes();
+    }
+
 
     public Double calculateBMR(String email) {
         //I teorien skal denne metode udregne en brugers BMR ud fra deres køn. 0 er mand, 1 er kvinde
