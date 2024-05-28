@@ -104,9 +104,9 @@ public class DBcontroller {
         }
     }
 
-    public void deleteDishById(Long DishId){
+    public void deleteDishById(Long dishId){
         String sql="DELETE FROM dish where dishId =?";
-        jdbcTemplate.update(sql,DishId);
+        jdbcTemplate.update(sql,dishId);
     }
     public List<Dish> findAllDishes(){
         try {
