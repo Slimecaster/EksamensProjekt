@@ -23,6 +23,12 @@ public class DBcontroller {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Creates a user or updates their information depending on whether the userId already exists
+     * @param myUser the myUser object of the MyUser class that will be created or updated
+     * @return the myUser object created and stored in the database
+     * @throws DataAccessException if the myUser is not stored or found correctly in the database
+     */
     public MyUser createUpdateUser (MyUser myUser){
         try {
             if(myUser.getUserId()==null){
@@ -36,40 +42,63 @@ public class DBcontroller {
             throw new RuntimeException("Error creating user", e);
         }
     }
+
+    /**
+     * Deletes a myUser by their email
+     * @param email the email of the myUser that will be deleted
+     */
     public void deleteUserByEmail(String email){
         String sql="DELETE FROM user where email =?";
         jdbcTemplate.update(sql,email);
     }
 
+    /**
+     * Finds all information about a myUser by their email
+     * @param email the email of the myUser that will be found
+     * @return the myUser with all their information
+     * @throws EmptyResultDataAccessException if the myUser is not found
+     */
     public Optional<MyUser> findUserByEmail(String email) {
         try {
             String sql = "SELECT * FROM user WHERE email = ?";
-            MyUser user = jdbcTemplate.queryForObject(sql, new Object[]{email}, userRowMapper());
-            return Optional.ofNullable(user);
+            MyUser myUser = jdbcTemplate.queryForObject(sql, new Object[]{email}, userRowMapper());
+            return Optional.ofNullable(myUser);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty(); // Returner tomt Optional hvis ingen bruger er fundet
         }
     }
+
+    /**
+     * This is a RowMapper for the MyUser class that sets all information about a myUser
+     * @return myUser object with all their information
+     */
     private RowMapper<MyUser> userRowMapper() {
         return (rs, rowNum) -> {
-            MyUser user = new MyUser();
-            user.setUserId(rs.getLong("userId"));
-            user.setFname(rs.getString("fname"));
-            user.setSname(rs.getString("sname"));
-            user.setPassword(rs.getString("password"));
-            user.setEmail(rs.getString("email"));
-            user.setPhoneNumber(rs.getString("phoneNumber"));
-            user.setWeight(rs.getDouble("weight"));
-            user.setHeight(rs.getInt("height"));
-            user.setAge(rs.getInt("age"));
-            user.setGender(rs.getInt("gender"));
-            user.setActivityLevel(rs.getInt("activityLevel"));
-            user.setGoal(rs.getInt("goal"));
-            user.setRole(rs.getString("role"));
+            MyUser myUser = new MyUser();
+            myUser.setUserId(rs.getLong("userId"));
+            myUser.setFname(rs.getString("fname"));
+            myUser.setSname(rs.getString("sname"));
+            myUser.setPassword(rs.getString("password"));
+            myUser.setEmail(rs.getString("email"));
+            myUser.setPhoneNumber(rs.getString("phoneNumber"));
+            myUser.setWeight(rs.getDouble("weight"));
+            myUser.setHeight(rs.getInt("height"));
+            myUser.setAge(rs.getInt("age"));
+            myUser.setGender(rs.getInt("gender"));
+            myUser.setActivityLevel(rs.getInt("activityLevel"));
+            myUser.setGoal(rs.getInt("goal"));
+            myUser.setRole(rs.getString("role"));
 
-            return user;
+            return myUser;
         };
     }
+
+    /**
+     * Creates an ingredient or updates its information depending on whether the ingredientId already exists
+     * @param ingredient the ingredient object that will be created or updated
+     * @return the ingredient object created and stored in the database
+     * @throws DataAccessException if the ingredient is not stored or found correctly in the database
+     */
     public Ingredient createUpdateIngredient(Ingredient ingredient){
         try{
             if (ingredient.getIngredientId()==null){
@@ -84,11 +113,22 @@ public class DBcontroller {
             throw new RuntimeException("Error creating ingredient", e);
         }
     }
+
+    /**
+     * Deletes an ingredient by its ingredientId
+     * @param ingredientId the ingredientId of the ingredient that will be deleted
+     */
     public void deleteIngredientById(Long ingredientId){
         String sql="DELETE FROM ingredient where ingredientId =?";
         jdbcTemplate.update(sql,ingredientId);
     }
 
+    /**
+     * Creates a dish or updates its information depending on whether the dishId already exists
+     * @param dish the dish object of the dish class that will be created or updated
+     * @return the dish object created and stored in the database
+     * @throws DataAccessException if the dish is not stored or found correctly in the database
+     */
     public Dish createUpdateDish(Dish dish){
         try{
             if (dish.getDishId()==null){
@@ -104,10 +144,20 @@ public class DBcontroller {
         }
     }
 
+    /**
+     * Deletes a dish by its dishId
+     * @param dishId the dishId of the dish that will be deleted
+     */
     public void deleteDishById(Long dishId){
         String sql="DELETE FROM dish where dishId =?";
         jdbcTemplate.update(sql,dishId);
     }
+
+    /**
+     * Finds a list of all dishes and their information in the database
+     * @return a list of all information about all dishes in the database
+     * @throws DataAccessException if the dishes are not found
+     */
     public List<Dish> findAllDishes(){
         try {
             String sql="SELECT * FROM dish";
@@ -116,11 +166,20 @@ public class DBcontroller {
             throw new RuntimeException("Error finding all dishes", e);
         }
     }
+
+    /**
+     * Finds a list of all recipes and their information in the database
+     * @return a list of all information about all recipes in the database
+     */
     public List<Recipe> show21Recipes(){
         String sql="SELECT * FROM recipe";
         return jdbcTemplate.query(sql,recipeRowmapper());
     }
 
+    /**
+     * This is a RowMapper for the Dish class that sets all information about a dish
+     * @return dish object with all its information
+     */
     public RowMapper<Dish> dishRowmapper(){
         return (rs, rowNum) ->{
             Dish dish = new Dish();
@@ -130,7 +189,12 @@ public class DBcontroller {
         };
     }
 
-
+    /**
+     * Creates a recipe or updates their information depending on whether the recipeId already exists
+     * @param recipe the recipe object of the Recipe class that will be created or updated
+     * @return the recipe object created and stored in the database
+     * @throws DataAccessException if the recipe is not stored or found correctly in the database
+     */
     public Recipe createUpdateRecipe(Recipe recipe){
         try {
             if (recipe.getRecipeId()==null){
@@ -145,11 +209,20 @@ public class DBcontroller {
         }
     }
 
+    /**
+     * Deletes a recipe by its recipeId
+     * @param recipeId the recipeId of the dish that will be deleted
+     */
     public void deleteRecipeById(Long recipeId){
         String sql="DELETE FROM recipe where recipeId =?";
         jdbcTemplate.update(sql,recipeId);
     }
 
+    /**
+     * Finds a list of all recipes and their information in the database
+     * @return a list of all information about all recipes in the database
+     * @throws DataAccessException if the recipes are not found
+     */
     public List<Recipe> findAllRecipes(){
         try {
             String sql="SELECT * FROM recipe";
@@ -159,6 +232,10 @@ public class DBcontroller {
         }
     }
 
+    /**
+     * This is a RowMapper for the Recipe class that sets all information about a recipe
+     * @return the recipe object with all its information
+     */
     public RowMapper<Recipe> recipeRowmapper(){
         return(rs, rowNum) ->{
             Recipe recipe = new Recipe();
@@ -171,9 +248,14 @@ public class DBcontroller {
         };
     }
 
+    /**
+     * Finds all the recipes that have the "favorite variable" set as 1 a.k.a. true
+     * @return a list of all the recipes with the "favorite variable set as 1 a.k.a. true"
+     * @throws Exception if the recipes are not found
+     */
     public List<Recipe> findFavoriteRecipes(){
         try {
-            //finder alle opsrifter hvor favorit variblen i databsen er =1, aka sand
+            //finder alle opskrifter hvor favorit variblen i databasen er =1, aka true
             String sql="SELECT * FROM recipe where favorite=1";
             return jdbcTemplate.query(sql,recipeRowmapper());
         } catch (Exception e) {
