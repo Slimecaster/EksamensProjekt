@@ -1,4 +1,4 @@
-package com.example.eksamensprojekt;
+package com.example.eksamensprojekt.Service;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -16,7 +16,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
     @Override
 
     public String getPassword() {
-        return this.getPassword();  // Antager at 'this.password' indeholder brugerens hashede password
+        return this.getPassword();
 
     }
 
@@ -26,7 +26,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     public String getUsername() {
 
-        return this.getUsername();  // Antager at du bruger e-mail som brugernavn
+        return this.getUsername();
 
     }
 
