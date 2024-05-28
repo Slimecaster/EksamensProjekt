@@ -1,4 +1,4 @@
-package com.example.eksamensprojekt;
+package com.example.eksamensprojekt.Config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
