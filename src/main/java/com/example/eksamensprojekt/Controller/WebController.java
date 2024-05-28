@@ -21,14 +21,12 @@ import java.util.Optional;
 @Controller
 public class WebController {
     private final CustomUserDetailsService userDetailsService;
-    private final DBcontroller dbcontroller;
     private final PasswordEncoder passwordEncoder;
     private final Usecase usecase;
 
     @Autowired
-    public WebController(CustomUserDetailsService userDetailsService, DBcontroller dbcontroller, PasswordEncoder passwordEncoder, Usecase usecase) {
+    public WebController(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder, Usecase usecase) {
         this.userDetailsService = userDetailsService;
-        this.dbcontroller = dbcontroller;
         this.passwordEncoder = passwordEncoder;
         this.usecase = usecase;
     }
@@ -48,7 +46,7 @@ public class WebController {
 
     @GetMapping("/user/homepage")
     public String userHomepage(Model model) {
-        model.addAttribute("dishes", dbcontroller.findAllDishes());
+        model.addAttribute("dishes", usecase.findAllDishes());
         return "homepage_user";
     }
 
@@ -61,7 +59,7 @@ public class WebController {
     @PostMapping("/login/register/user")
     public String registerUser(MyUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        dbcontroller.createUpdateUser(user);
+        usecase.createUpdateUser(user);
         return "redirect:/login/register/user/userCreatedSuccess";
 
     }
@@ -77,7 +75,7 @@ public class WebController {
 
     @PostMapping("/admin/homepage/createRecipe")
     public String createRecipe(Recipe recipe) {
-        dbcontroller.createUpdateRecipe(recipe);
+        usecase.createUpdateRecipe(recipe);
         return "recipeCreatedSuccess";
     }
 
@@ -86,7 +84,7 @@ public class WebController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName(); // The logged-in user's email
 
-        Optional<MyUser> userOptional = dbcontroller.findUserByEmail(userEmail);
+        Optional<MyUser> userOptional = usecase.findUserByEmail(userEmail);
         if (userOptional.isPresent()) {
             MyUser user = userOptional.get(); // Extract the user object from the optional
             model.addAttribute("user", user);
