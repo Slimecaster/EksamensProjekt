@@ -25,6 +25,7 @@ public class Usecase {
     public MyUser createUpdateUser(MyUser myUser){
         return dbController.createUpdateUser(myUser);
     }
+
     public void deleteUserByEmail(String email){
         dbController.deleteUserByEmail(email);
     }
@@ -32,42 +33,55 @@ public class Usecase {
     public Optional<MyUser> findUserByEmail(String email) {
         return dbController.findUserByEmail(email);
     }
+
     public Ingredient createUpdateIngredient(Ingredient ingredient){
         return dbController.createUpdateIngredient(ingredient);
     }
+
     public void deleteIngredientById(Long ingredientId){
         dbController.deleteIngredientById(ingredientId);
     }
+
     public Dish createUpdateDish(Dish dish){
         return dbController.createUpdateDish(dish);
     }
+
     public void deleteDishById(Long dishId){
         dbController.deleteDishById(dishId);
     }
+
     public List<Dish> findAllDishes(){
         return dbController.findAllDishes();
     }
+
     public List<Recipe> show21Recipes(){
         //denne her er ikke færdig i sql
         return dbController.show21Recipes();
     }
+
     public Recipe createUpdateRecipe(Recipe recipe){
         return dbController.createUpdateRecipe(recipe);
     }
+
     public void deleteRecipeById(Long recipeId){
         dbController.deleteRecipeById(recipeId);
     }
+
     public List<Recipe> findAllRecipes(){
         return dbController.findAllRecipes();
     }
+
     public List<Recipe> findFavoriteRecipes(){
         //denne her er ikke færdig i sql
         return dbController.findFavoriteRecipes();
     }
 
-
+    /**
+     * Calls the findUserByEmail to find a myUser by their email and calculates the myUsers BMR
+     * @param email the email of the myUser object that will get their BMR calculated
+     * @return the BMR of the myUser
+     */
     public Double calculateBMR(String email) {
-        //I teorien skal denne metode udregne en brugers BMR ud fra deres køn. 0 er mand, 1 er kvinde
         Optional<MyUser> optionalUser = dbController.findUserByEmail(email);
         double BMR = 0;
         // Check if user is present and calculate BMR accordingly
@@ -82,6 +96,11 @@ public class Usecase {
         return BMR;
     }
 
+    /**
+     * Calculates daily calorie intake for a myUser based on their BMR and activityLevel
+     * @param email the email of the myUser object that will get their calories calculated
+     * @return the daily calorie intake based on a myUsers BMR and activityLevel
+     */
     public Double calculateActivityLevel(String email){
         if (myUser.getActivityLevel()==0){
             return calculateBMR(email)*1.2;
@@ -99,6 +118,12 @@ public class Usecase {
             return calculateBMR(email)*1.9;
         } return null;
     }
+
+    /**
+     * Calculates the daily calorie intake of a myUser based on their BMR, activityLevel and goal
+     * @param email the email of the myUser object that will get their calories calculated
+     * @return the daily calorie intake for a myUser based on their BMR, activityLevel and goal
+     */
     public Double calculateDailyCalories(String email){
         if(myUser.getGoal()==0){
             return calculateActivityLevel(email)-500;
@@ -114,6 +139,11 @@ public class Usecase {
         }return null;
     }
 
+    /**
+     * Calculates how many calories a meal should have depending on whether it is breakfast or not
+     * @param email the email of the myUser object that will have the meal
+     * @return the amount of calories a meal should have
+     */
     public Double caloriesForDifferentMeals(String email){
         //Bruger .equals da vi vil sammenligne Strings
         if (recipe.getTimeOfDayMeal().equals("Breakfast")){
@@ -125,6 +155,7 @@ public class Usecase {
         }
     }
 
+    /*
     public Double caloriesInMasterRecipe(){
         //Skal måske have en liste fra recipe over ingredienser som parameter
         double sum=0;
@@ -134,8 +165,10 @@ public class Usecase {
         }
         return sum;
     }
+    */
 
-    /*public Double calculateQuantityRatio(){
+    /*
+    public Double calculateQuantityRatio(){
         //Skal have samme liste som caloriesInMasterRecipe
         double sum=0;
         for(int i = 0; i<ingredientListForDish.size(); i++){
