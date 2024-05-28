@@ -70,19 +70,15 @@ public class Usecase {
         //I teorien skal denne metode udregne en brugers BMR ud fra deres køn. 0 er mand, 1 er kvinde
         Optional<MyUser> optionalUser = dbController.findUserByEmail(email);
         double BMR = 0;
-
         // Check if user is present and calculate BMR accordingly
         if (optionalUser.isPresent()) {
-            MyUser myUser = optionalUser.get();
-
+            myUser = optionalUser.get();
             if (myUser.getGender() == 0) {
                 BMR = ((10 * myUser.getWeight()) + (6.25 * myUser.getHeight()) - (5 * myUser.getAge()) + 5);
             } else {
                 BMR = ((10 * myUser.getWeight()) + (6.25 * myUser.getHeight()) - (5 * myUser.getAge()) - 161);
-
             }
         }
-        System.out.println(BMR);
         return BMR;
     }
 
