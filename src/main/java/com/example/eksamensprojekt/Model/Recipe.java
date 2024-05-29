@@ -27,18 +27,6 @@ public class Recipe {
         this.recipeId = recipeId;
     }
 
-    public double calculateCalories(ArrayList<Ingredient> ingredientList){
-        double totalCalories=0.0;
-        Ingredient ingredient=new Ingredient();
-        for(int i = 0; i<ingredientListForDish.size(); i++){
-            this.protein+=ingredient.getProtein()*(ingredient.getWeight()/100);
-            this.fat+=ingredient.getFat()*(ingredient.getWeight()/100);
-            this.carbs+=ingredient.getCarbs()*(ingredient.getWeight()/100);
-
-        }
-        totalCalories=protein+fat+carbs;
-        return totalCalories;
-    }
 
 
     public Long getRecipeId() {

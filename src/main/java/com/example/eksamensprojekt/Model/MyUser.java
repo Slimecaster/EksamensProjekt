@@ -8,6 +8,7 @@ public class MyUser {
     private String fname,sname,password,email,phoneNumber,role;
     private double weight;
     private int height,age,gender,activityLevel,goal;
+    private Subscription subscription;
 
 
 
@@ -17,21 +18,21 @@ public class MyUser {
 
     }
 
-    public MyUser(Long userId, String fname, String sname, String password, String email, String phoneNumber,
-                  double weight, int height, int age, int gender, int activityLevel, int goal, String role) {
+    public MyUser(Long userId, String fname, String sname, String password, String email, String phoneNumber, String role, double weight, int height, int age, int gender, int activityLevel, int goal, Subscription subscription) {
         this.userId = userId;
         this.fname = fname;
         this.sname = sname;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
         this.weight = weight;
         this.height = height;
         this.age = age;
         this.gender = gender;
         this.activityLevel = activityLevel;
         this.goal = goal;
-        this.role = role;
+        this.subscription = subscription;
     }
 
     public Long getUserId() {
@@ -82,6 +83,14 @@ public class MyUser {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public double getWeight() {
         return weight;
     }
@@ -130,12 +139,12 @@ public class MyUser {
         this.goal = goal;
     }
 
-    public String getRole() {
-        return role;
+    public Subscription getSubscription() {
+        return subscription;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
     }
 
     @Override
@@ -154,6 +163,7 @@ public class MyUser {
                 ", gender=" + gender +
                 ", activityLevel=" + activityLevel +
                 ", goal=" + goal +
+                ", subscription=" + subscription +
                 '}';
     }
 }
