@@ -12,4 +12,12 @@ class MyUserTest {
         myUser.setEmail("test@gmail.com");
         assertEquals("test@gmail.com",myUser.getEmail());
     }
+
+    @Test
+    void setPassword() {
+        MyUser myUser = new MyUser();
+        myUser.setPassword("password");
+        assertEquals("password", myUser.getPassword());
+    }
+
 }
