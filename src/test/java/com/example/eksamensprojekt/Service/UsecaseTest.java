@@ -1,6 +1,7 @@
 package com.example.eksamensprojekt.Service;
 
 import com.example.eksamensprojekt.Model.MyUser;
+import com.example.eksamensprojekt.Model.Subscription;
 import com.example.eksamensprojekt.Repository.DBcontroller;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,10 +33,12 @@ class UsecaseTest {
     @InjectMocks
     Usecase usecase=new Usecase();
 
+    Subscription subscription=new Subscription();
+
 
     @Test
     void calculateBMRForFemale(){
-        MyUser user = new MyUser(1L,"Fname1","Sname1","Password1","email1@gmail.com","11 22 33 44",84,174,42,1,2,0,"User");
+        MyUser user = new MyUser(1L,"Fname1","Sname1","Password1","email1@gmail.com","11 22 33 44","User",84,174,42,1,2,0,subscription);
 
         Double expectedBMR=10 * 84 + 6.25 * 174 - 5 * 42 - 161;
         Double actualBMR= usecase.calculateBMR("email1@gmail.com");
@@ -45,19 +48,13 @@ class UsecaseTest {
 
     @Test
     void calculateBMRForMale(){
-        MyUser user = new MyUser(1L,"Fname1","Sname1","Password1","email1@gmail.com","11 22 33 44",84,174,42,0,2,0,"User");
+        MyUser user = new MyUser(1L,"Fname1","Sname1","Password1","email1@gmail.com","11 22 33 44","User",84,174,42,1,2,0,subscription);
 
         Double expectedBMR=10 * 84 + 6.25 * 174 - 5 * 42 + 5;
         Double actualBMR= usecase.calculateBMR("email1@gmail.com");
 
         assertEquals(expectedBMR, actualBMR);
     }
-
-
-
-
-
-
 
 
 
