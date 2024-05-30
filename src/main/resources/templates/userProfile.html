@@ -181,7 +181,7 @@
     <p th:text="'Weight: ' + ${user.weight} + ' kg'">Weight: 70 kg</p>
     <p th:text="'Height: ' + ${user.height} + ' cm'">Height: 180 cm</p>
     <p th:text="'Age: ' + ${user.age}">Age: 25</p>
-    <p th:text="'Gender: ' + (${user.gender} == 1 ? 'Male' : 'Female')">Gender: Male</p>
+    <p th:text="'Gender: ' + (${user.gender} == 0 ? 'Male' : 'Female')">Gender: Male</p>
     <p>
         Activity Level:
         <span th:switch="${user.activityLevel}">

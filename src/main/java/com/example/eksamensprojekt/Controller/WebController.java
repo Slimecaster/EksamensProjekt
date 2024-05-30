@@ -46,7 +46,7 @@ public class WebController {
 
     @GetMapping("/user/homepage")
     public String userHomepage(Model model) {
-        model.addAttribute("dishes", usecase.findAllDishes());
+        model.addAttribute("dishes", usecase.show21Recipes());
         return "homepage_user";
     }
 
