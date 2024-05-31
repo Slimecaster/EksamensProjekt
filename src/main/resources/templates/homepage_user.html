@@ -129,8 +129,29 @@
     <h1>Welcome to the User Homepage</h1>
     <h2>List of Dishes</h2>
     <ul>
-        <li th:each="dish : ${dishes}">
-            <span th:text="'ID: ' + ${dish.dishId} + ', Name: ' + ${dish.name} + ', Type: ' + ${dish.type}"></span>
+        <li th:each="recipe : ${recipes}">
+            <div>
+                <span th:text="'Description: ' + ${recipe.description}"></span><br>
+                <span th:text="'Calories: ' + ${recipe.calories}"></span><br>
+                <span th:text="'Protein: ' + ${recipe.protein}"></span><br>
+                <span th:text="'Fat: ' + ${recipe.fat}"></span><br>
+                <span th:text="'Carbs: ' + ${recipe.carbs}"></span><br>
+                <span th:text="'Time of Day: ' + ${recipe.timeOfDayMeal}"></span><br>
+                <div>
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        <li th:each="ingredient : ${recipe.ingredientListForDish}">
+                            <div>
+                                <span th:text="'Name: ' + ${ingredient.name}"></span><br>
+                                <span th:text="'Calories: ' + ${ingredient.calories}"></span><br>
+                                <span th:text="'Protein: ' + ${ingredient.protein}"></span><br>
+                                <span th:text="'Fat: ' + ${ingredient.fat}"></span><br>
+                                <span th:text="'Carbs: ' + ${ingredient.carbs}"></span><br>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </li>
     </ul>
     </body>

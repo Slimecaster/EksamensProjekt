@@ -9,25 +9,30 @@ public class Recipe {
     private ArrayList<Ingredient> ingredientListForDish=new ArrayList<>();
     private String timeOfDayMeal;
     //En privat medlemsvariabel til at kunne bestemme om en ret er til morgenmad, frokost eller aftensmad.
-    private double ingredientWeight;
-    //En private medlemsvariabel, der skal bruges i omskrivning af opskrifter
+
 
 
     public Recipe() {
     }
 
-    public Recipe(String timeOfDayMeal, double ingredientWeight, String description, double carbs, double fat, double protein, double calories, Long recipeId) {
-        this.timeOfDayMeal = timeOfDayMeal;
-        this.ingredientWeight = ingredientWeight;
-        this.description = description;
-        this.carbs = carbs;
-        this.fat = fat;
-        this.protein = protein;
-        this.calories = calories;
+    public Recipe(Long recipeId, double calories, double protein, double fat, double carbs, String description, ArrayList<Ingredient> ingredientListForDish, String timeOfDayMeal) {
         this.recipeId = recipeId;
+        this.calories = calories;
+        this.protein = protein;
+        this.fat = fat;
+        this.carbs = carbs;
+        this.description = description;
+        this.ingredientListForDish = ingredientListForDish;
+        this.timeOfDayMeal = timeOfDayMeal;
     }
 
+    public ArrayList<Ingredient> getIngredientListForDish() {
+        return ingredientListForDish;
+    }
 
+    public void setIngredientListForDish(ArrayList<Ingredient> ingredientListForDish) {
+        this.ingredientListForDish = ingredientListForDish;
+    }
 
     public Long getRecipeId() {
         return recipeId;
@@ -75,14 +80,6 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public double getIngredientWeight() {
-        return ingredientWeight;
-    }
-
-    public void setIngredientWeight(double ingredientWeight) {
-        this.ingredientWeight = ingredientWeight;
     }
 
     public String getTimeOfDayMeal() {

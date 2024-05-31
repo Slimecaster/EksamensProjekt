@@ -4,44 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create/Update Recipe</title>
+    <style>
+        .ingredient { margin-bottom: 20px; }
+    </style>
 </head>
 <body>
 <h1>Create/Update Recipe</h1>
 
-<!-- Form to submit recipe data to the server -->
-<form action="/admin/homepage/createRecipe" method="POST">
+<form action="/admin/homepage/createRecipe" method="POST" enctype="multipart/form-data">
+    <label for="name">Navn på retten:</label>
+    <input type="text" id="name" name="name" required><br>
 
-    <label for="name">Navn på retten:</label> <!-- Etiket for navnet på retten -->
-    <input type="text" id="name" name="name" required><br> <!-- Inputfelt til navn på retten -->
+    <label for="description">Beskrivelse:</label>
+    <textarea id="description" name="description" rows="4" required></textarea><br>
 
-    <label for="ingredients">Ingredienser:</label><br> <!-- Etiket for ingredienser -->
-    <textarea id="ingredients" name="ingredients" rows="4" required></textarea><br> <!-- Tekstområde til ingredienser -->
+    <label for="calories">Kalorier:</label>
+    <input type="number" id="calories" name="calories" step="0.01" required><br>
 
-    <label for="procedure">Fremgangsmåde:</label><br> <!-- Etiket for fremgangsmåde -->
-    <textarea id="procedure" name="procedure" rows="4" required></textarea><br> <!-- Tekstområde til fremgangsmåde -->
+    <label for="protein">Protein (g):</label>
+    <input type="number" id="protein" name="protein" step="0.01" required><br>
 
-    <label for="duration">Varighed:</label> <!-- Etiket for varighed -->
-    <input type="text" id="duration" name="duration" required><br> <!-- Inputfelt til varighed -->
+    <label for="fat">Fedt (g):</label>
+    <input type="number" id="fat" name="fat" step="0.01" required><br>
 
-    <label for="difficulty">Sværhedsgrad:</label> <!-- Etiket for sværhedsgrad -->
-    <select id="difficulty" name="difficulty" required> <!-- Dropdown-menu til sværhedsgrad -->
-        <option value="easy">Let</option> <!-- Valgmulighed for let -->
-        <option value="medium">Medium</option> <!-- Valgmulighed for medium -->
-        <option value="hard">Svær</option> <!-- Valgmulighed for svær -->
+    <label for="carbs">Kulhydrater (g):</label>
+    <input type="number" id="carbs" name="carbs" step="0.01" required><br>
+
+    <label for="timeOfDayMeal">Tid på dagen:</label>
+    <select id="timeOfDayMeal" name="timeOfDayMeal" required>
+        <option value="Morgenmad">Morgenmad</option>
+        <option value="Frokost">Frokost</option>
+        <option value="Aftensmad">Aftensmad</option>
     </select><br>
 
-    <label for="categories">Kategori:</label> <!-- Etiket for kategori -->
-    <input type="text" id="categories" name="categories" required><br> <!-- Inputfelt til kategori -->
+    <h3>Ingredienser</h3>
+    <div id="ingredientsContainer">
+        <div class="ingredient">
+            <label for="ingredientName0">Navn:</label>
+            <input type="text" id="ingredientName0" name="ingredientName[]" required><br>
 
-    <!--  NOTE TIL OS: Husk at håndtere billedet på serversiden, når formularen sendes, for at gemme det og relatere det til den ret, der oprettes.-->
-    <label for="image">Billede:</label> <!-- Etiket for billede -->
-    <input type="file" id="image" name="image" accept="image/*" required><br> <!-- Inputfelt til billedeupload -->
+            <label for="ingredientCalories0">Kalorier:</label>
+            <input type="number" id="ingredientCalories0" name="ingredientCalories[]" step="0.01" required><br>
 
-    <input type="submit" value="Tilføj ret"> <!-- Indsend knap til at tilføje ret -->
+            <label for="ingredientProtein0">Protein (g):</label>
+            <input type="number" id="ingredientProtein0" name="ingredientProtein[]" step="0.01" required><br>
 
+            <label for="ingredientFat0">Fedt (g):</label>
+            <input type="number" id="ingredientFat0" name="ingredientFat[]" step="0.01" required><br>
 
-    <!-- Submit button to save the recipe -->
-    <button type="submit">Opret opskrift</button>
+            <label for="ingredientCarbs0">Kulhydrater (g):</label>
+            <input type="number" id="ingredientCarbs0" name="ingredientCarbs[]" step="0.01" required><br>
+
+            <label for="ingredientWeight0">Vægt (g):</label>
+            <input type="number" id="ingredientWeight0" name="ingredientWeight[]" step="0.01" required><br>
+        </div>
+    </div>
+
+    <button type="button" onclick="addIngredient()">Tilføj ingrediens</button><br>
+
+    <label for="image">Billede:</label>
+    <input type="file" id="image" name="image" accept="image/*" required><br>
+
+    <input type="submit" value="Tilføj ret">
 </form>
+
+<script>
+    let ingredientCount = 1;
+
+    function addIngredient() {
+        const container = document.getElementById('ingredientsContainer');
+        const newIngredient = document.createElement('div');
+        newIngredient.className = 'ingredient';
+
+        newIngredient.innerHTML = `
+            <label for="ingredientName${ingredientCount}">Navn:</label>
+            <input type="text" id="ingredientName${ingredientCount}" name="ingredientName[]" required><br>
+
+            <label for="ingredientCalories${ingredientCount}">Kalorier:</label>
+            <input type="number" id="ingredientCalories${ingredientCount}" name="ingredientCalories[]" step="0.01" required><br>
+
+            <label for="ingredientProtein${ingredientCount}">Protein (g):</label>
+            <input type="number" id="ingredientProtein${ingredientCount}" name="ingredientProtein
+${ingredientCount}" step="0.01" required><br>
+
+            <label for="ingredientFat${ingredientCount}">Fedt (g):</label>
+            <input type="number" id="ingredientFat${ingredientCount}" name="ingredientFat[]" step="0.01" required><br>
+
+            <label for="ingredientCarbs${ingredientCount}">Kulhydrater (g):</label>
+            <input type="number" id="ingredientCarbs${ingredientCount}" name="ingredientCarbs[]" step="0.01" required><br>
+
+            <label for="ingredientWeight${ingredientCount}">Vægt (g):</label>
+            <input type="number" id="ingredientWeight${ingredientCount}" name="ingredientWeight[]" step="0.01" required><br>
+        `;
+
+        container.appendChild(newIngredient);
+        ingredientCount++;
+    }
+</script>
+
 </body>
 </html>
