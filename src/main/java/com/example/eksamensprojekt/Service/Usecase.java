@@ -177,5 +177,41 @@ public class Usecase {
         return sum;
     }*/
 
+    public double caloriesInMasterRecipe() {
+            double sum = 0;
+            for (Ingredient ingredient : ingredientListForDish) {
+                double ingredientCalories = ingredient.getCalories() / 100 * ingredient.getWeight();
+                sum += ingredientCalories;
+            }
+            return sum;
+        }
+
+        public double proteinInMasterRecipe() {
+            double sum = 0;
+            for (Ingredient ingredient : ingredientListForDish) {
+                double ingredientProtein = ingredient.getProtein() / 100 * ingredient.getWeight();
+                sum += ingredientProtein;
+            }
+            return sum;
+        }
+
+        public double fatInMasterRecipe() {
+            double sum = 0;
+            for (Ingredient ingredient : ingredientListForDish) {
+                double ingredientFat = ingredient.getFat() / 100 * ingredient.getWeight();
+                sum += ingredientFat;
+            }
+            return sum;
+        }
+
+        public double carbsInMasterRecipe() {
+            double sum = 0;
+            for (Ingredient ingredient : ingredientListForDish) {
+                double ingredientCarbs = ingredient.getCarbs() / 100 * ingredient.getWeight();
+                sum += ingredientCarbs;
+            }
+            return sum;
+    }
 }
+
 

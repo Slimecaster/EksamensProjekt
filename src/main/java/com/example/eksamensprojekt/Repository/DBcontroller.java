@@ -172,7 +172,7 @@ public class DBcontroller {
      * @return a list of all information about all recipes in the database
      */
     public List<Recipe> show21Recipes(){
-        String sql="SELECT * FROM recipe LIMIT 21";
+        String sql="SELECT * FROM recipe LIMIT 3";
         return jdbcTemplate.query(sql,recipeRowmapper());
     }
 
@@ -198,11 +198,11 @@ public class DBcontroller {
     public Recipe createUpdateRecipe(Recipe recipe){
         try {
             if (recipe.getRecipeId()==null){
-                String sql="INSERT INTO recipe(calories,protein,fat,carbs,description,timeOfDay) VALUES (?,?,?,?,?,?)";
-                jdbcTemplate.update(sql,recipe.getCalories(),recipe.getProtein(),recipe.getFat(),recipe.getCarbs(),recipe.getDescription(), recipe.getTimeOfDayMeal());
+                String sql="INSERT INTO recipe(name,calories,protein,fat,carbs,description,timeOfDay) VALUES (?,?,?,?,?,?,?)";
+                jdbcTemplate.update(sql,recipe.getName(),recipe.getCalories(),recipe.getProtein(),recipe.getFat(),recipe.getCarbs(),recipe.getDescription(), recipe.getTimeOfDayMeal());
             } else {
                 String sql="UPDATE recipe set calories=?,protein=?,fat=?,carbs=? ,timeOfDay=? where recipeId="+String.valueOf(recipe.getRecipeId());
-                jdbcTemplate.update(sql,recipe.getCalories(),recipe.getProtein(),recipe.getFat(),recipe.getCarbs(),recipe.getDescription(),recipe.getTimeOfDayMeal());
+                jdbcTemplate.update(sql,recipe.getName(),recipe.getCalories(),recipe.getProtein(),recipe.getFat(),recipe.getCarbs(),recipe.getDescription(),recipe.getTimeOfDayMeal());
             } return recipe;
         } catch (DataAccessException e) {
             throw new RuntimeException(e);
@@ -239,11 +239,13 @@ public class DBcontroller {
     public RowMapper<Recipe> recipeRowmapper(){
         return(rs, rowNum) ->{
             Recipe recipe = new Recipe();
+            recipe.setName(rs.getString("name"));
             recipe.setCalories(rs.getInt("calories"));
             recipe.setProtein(rs.getInt("protein"));
             recipe.setFat(rs.getInt("fat"));
             recipe.setCarbs(rs.getInt("carbs"));
             recipe.setDescription(rs.getString("description"));
+            recipe.setTimeOfDayMeal(rs.getString("timeOfDay"));
             return recipe;
         };
     }

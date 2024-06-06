@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Recipe {
     private Long recipeId;
     private double calories, protein, fat, carbs;
-    private String description;
+    private String description, name;
     private ArrayList<Ingredient> ingredientListForDish=new ArrayList<>();
     private String timeOfDayMeal;
     //En privat medlemsvariabel til at kunne bestemme om en ret er til morgenmad, frokost eller aftensmad.
@@ -15,13 +15,14 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(Long recipeId, double calories, double protein, double fat, double carbs, String description, ArrayList<Ingredient> ingredientListForDish, String timeOfDayMeal) {
+    public Recipe(Long recipeId, double calories, double protein, double fat, double carbs, String description, String name, ArrayList<Ingredient> ingredientListForDish, String timeOfDayMeal) {
         this.recipeId = recipeId;
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
         this.carbs = carbs;
         this.description = description;
+        this.name = name;
         this.ingredientListForDish = ingredientListForDish;
         this.timeOfDayMeal = timeOfDayMeal;
     }
@@ -32,6 +33,14 @@ public class Recipe {
 
     public void setIngredientListForDish(ArrayList<Ingredient> ingredientListForDish) {
         this.ingredientListForDish = ingredientListForDish;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getRecipeId() {
