@@ -58,6 +58,9 @@ public class Usecase {
         //denne her er ikke færdig i sql
         return dbController.show21Recipes();
     }
+    public Optional<Recipe> findRecipeById(Long recipeId){
+        return dbController.findRecipeById(recipeId);
+    }
 
     public Recipe createUpdateRecipe(Recipe recipe){
         return dbController.createUpdateRecipe(recipe);

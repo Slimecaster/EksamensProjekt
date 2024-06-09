@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,7 +47,7 @@ public class WebController {
 
     @GetMapping("/user/homepage")
     public String userHomepage(Model model) {
-        model.addAttribute("recipes", usecase.show21Recipes());
+        model.addAttribute("recipe", usecase.show21Recipes());
         return "homepage_user";
     }
 
@@ -103,8 +104,12 @@ public class WebController {
         return "redirect:/logout";
     }
 
-
-
-
+    @GetMapping("/user/recipe/{recipeId}")
+    public String ShowRecipe(@PathVariable Long recipeId, Model model){
+        usecase.findRecipeById(recipeId).ifPresent(recipe -> model.addAttribute("recipe", recipe));
+        return "specificRecipe";
+    }
 }
+
+
 

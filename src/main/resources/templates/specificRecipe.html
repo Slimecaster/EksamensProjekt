@@ -132,8 +132,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            text-decoration: none; /* Ensure the card itself has no underline */
-            color: inherit; /* Inherit the text color */
         }
 
         .recipe-card:hover {
@@ -212,29 +210,27 @@
 <h1>Welcome to the User Homepage</h1>
 <h2>List of Dishes</h2>
 <div class="recipes-container">
-    <div th:each="recipe : ${recipe}">
-        <a th:href="@{/user/recipe/{recipeId}(recipeId=${recipe.recipeId})}" class="recipe-card">
-            <div class="meal-type" th:text="${recipe.timeOfDayMeal}">Meal Type</div>
-            <h3 th:text="${recipe.name}">Recipe Name</h3>
-            <div class="nutrition-container">
-                <div class="nutrition-item">
-                    <strong th:text="${recipe.calories}">0</strong>
-                    <span>Calories</span>
-                </div>
-                <div class="nutrition-item">
-                    <strong th:text="${recipe.protein}">0</strong>
-                    <span>Protein</span>
-                </div>
-                <div class="nutrition-item">
-                    <strong th:text="${recipe.fat}">0</strong>
-                    <span>Fat</span>
-                </div>
-                <div class="nutrition-item">
-                    <strong th:text="${recipe.carbs}">0</strong>
-                    <span>Carbs</span>
-                </div>
+    <div th:each="recipe : ${recipe}" class="recipe-card">
+        <div class="meal-type" th:text="${recipe.timeOfDayMeal}">Meal Type</div>
+        <h3 th:text="${recipe.name}">Recipe Name</h3>
+        <div class="nutrition-container">
+            <div class="nutrition-item">
+                <strong th:text="${recipe.calories}">0</strong>
+                <span>Calories</span>
             </div>
-        </a>
+            <div class="nutrition-item">
+                <strong th:text="${recipe.protein}">0</strong>
+                <span>Protein</span>
+            </div>
+            <div class="nutrition-item">
+                <strong th:text="${recipe.fat}">0</strong>
+                <span>Fat</span>
+            </div>
+            <div class="nutrition-item">
+                <strong th:text="${recipe.carbs}">0</strong>
+                <span>Carbs</span>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -153,6 +153,16 @@ public class DBcontroller {
         jdbcTemplate.update(sql,dishId);
     }
 
+    public Optional<Recipe> findRecipeById(Long recipeId) {
+        try {
+            String sql = "SELECT * FROM recipe WHERE recipeId = ?";
+            Recipe recipe = jdbcTemplate.queryForObject(sql, new Object[]{recipeId}, recipeRowmapper());
+            return Optional.ofNullable(recipe);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty(); // Return empty Optional if no recipe is found
+        }
+    }
+
     /**
      * Finds a list of all dishes and their information in the database
      * @return a list of all information about all dishes in the database
