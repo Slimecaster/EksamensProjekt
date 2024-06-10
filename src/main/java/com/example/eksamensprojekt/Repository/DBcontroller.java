@@ -29,19 +29,21 @@ public class DBcontroller {
      * @return the myUser object created and stored in the database
      * @throws DataAccessException if the myUser is not stored or found correctly in the database
      */
-    public MyUser createUpdateUser (MyUser myUser){
+    public MyUser createUpdateUser(MyUser myUser) {
         try {
-            if(myUser.getUserId()==null){
-                String sql="INSERT INTO user(userid,fname,sname,password,email,phoneNumber,weight,height,age,gender,activityLevel,goal,role) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,'USER')";
-                jdbcTemplate.update(sql, myUser.getUserId(), myUser.getFname(), myUser.getSname(), myUser.getPassword(), myUser.getEmail(), myUser.getPhoneNumber(), myUser.getWeight(), myUser.getHeight(), myUser.getAge(), myUser.getGender(), myUser.getActivityLevel(), myUser.getGoal());
-            }else{
-                String sql = "UPDATE user SET fname=?,sname=?,password=?,email=?,phoneNumber=?,weight=?,height=?,age=?,gender=?,activityLevel=?,goal=?,role=? WHERE userId="+String.valueOf(myUser.getUserId());
-                jdbcTemplate.update(sql, myUser.getUserId(), myUser.getFname(), myUser.getSname(), myUser.getPassword(), myUser.getEmail(), myUser.getPhoneNumber(), myUser.getWeight(), myUser.getHeight(), myUser.getAge(), myUser.getGender(), myUser.getActivityLevel(), myUser.getGoal(), myUser.getRole());
-            }return myUser;
-        } catch(DataAccessException e){
+            if (myUser.getUserId() == null) {
+                String sql = "INSERT INTO user(fname, sname, password, email, phoneNumber, weight, height, age, gender, activityLevel, goal, role, subscription_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                jdbcTemplate.update(sql, myUser.getFname(), myUser.getSname(), myUser.getPassword(), myUser.getEmail(), myUser.getPhoneNumber(), myUser.getWeight(), myUser.getHeight(), myUser.getAge(), myUser.getGender(), myUser.getActivityLevel(), myUser.getGoal(), "USER", 1);
+            } else {
+                String sql = "UPDATE user SET fname=?, sname=?, email=?, phoneNumber=?, weight=?, height=?, age=?, gender=?, activityLevel=?, goal=?, role='USER', subscription_id=? WHERE userId=?";
+                jdbcTemplate.update(sql, myUser.getFname(), myUser.getSname(), myUser.getEmail(), myUser.getPhoneNumber(), myUser.getWeight(), myUser.getHeight(), myUser.getAge(), myUser.getGender(), myUser.getActivityLevel(), myUser.getGoal(), myUser.getSubscription(), myUser.getUserId());
+            }
+            return myUser;
+        } catch (DataAccessException e) {
             throw new RuntimeException("Error creating user", e);
         }
     }
+
 
     /**
      * Deletes a myUser by their email
@@ -182,7 +184,7 @@ public class DBcontroller {
      * @return a list of all information about all recipes in the database
      */
     public List<Recipe> show21Recipes(){
-        String sql="SELECT * FROM recipe LIMIT 3";
+        String sql="SELECT * FROM recipe LIMIT 21";
         return jdbcTemplate.query(sql,recipeRowmapper());
     }
 

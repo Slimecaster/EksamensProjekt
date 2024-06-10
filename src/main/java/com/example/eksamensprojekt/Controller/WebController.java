@@ -84,11 +84,19 @@ public class WebController {
     public String getUserProfile(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName(); // The logged-in user's email
-
         Optional<MyUser> userOptional = usecase.findUserByEmail(userEmail);
+
         if (userOptional.isPresent()) {
             MyUser user = userOptional.get(); // Extract the user object from the optional
+            double bmr = usecase.calculateBMR(userEmail);
+            double activityLevelCalories = usecase.calculateActivityLevel(userEmail);
+            double dailyCalories = usecase.calculateDailyCalories(userEmail);
+
             model.addAttribute("user", user);
+            model.addAttribute("bmr", bmr);
+            model.addAttribute("activityLevelCalories", activityLevelCalories);
+            model.addAttribute("dailyCalories", dailyCalories);
+
             return "userProfile";
         } else {
             // Handle user not found
@@ -108,6 +116,24 @@ public class WebController {
     public String ShowRecipe(@PathVariable Long recipeId, Model model){
         usecase.findRecipeById(recipeId).ifPresent(recipe -> model.addAttribute("recipe", recipe));
         return "specificRecipe";
+    }
+    @GetMapping("/user/edit/{email}")
+    public String showEditForm(@PathVariable String email, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName(); // The logged-in user's email
+        Optional<MyUser> userOptional = usecase.findUserByEmail(userEmail);
+        userOptional.ifPresent(user -> model.addAttribute("user", user));
+        return "editUser";
+    }
+
+    @PostMapping("/user/edit/{email}")
+    public String updateUser(@PathVariable String email, MyUser user) {
+        // Update the user details
+        // Assuming you have a method in your use case to update the user
+        usecase.createUpdateUser(user);
+
+        // Redirect to the user profile page or any other appropriate page
+        return "redirect:/user/profile";
     }
 }
 

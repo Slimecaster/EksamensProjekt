@@ -155,33 +155,69 @@
         .delete-button:hover {
             background-color: #cc0000;
         }
+
+        .edit-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            margin-left: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
+<!-- Header section -->
 <header>
+    <!-- Logo container -->
     <div class="logo-container">
+        <!-- Logo link -->
         <a href="/user/homepage">
+            <!-- Logo image -->
             <img src="../Images/minkostplan-logo.png" alt="Min Kostplan logo" class="logo">
         </a>
     </div>
+    <!-- Header right section -->
     <div class="header-right">
+        <!-- Logout button -->
         <a href="/logout" class="login-button">log ud</a>
+        <!-- User image container -->
         <div class="user-image-container">
+            <!-- User profile link -->
             <a href="/user/profile">
+                <!-- User profile image -->
                 <img src="../Images/user-image.png" alt="User Image">
             </a>
         </div>
     </div>
 </header>
+<!-- User profile container -->
 <div class="profile-container">
     <!-- User profile details -->
-    <h1 th:text="${user.fname + ' ' + user.sname}">User Name</h1>
-    <p th:text="'Email: ' + ${user.email}">Email: user@example.com</p>
-    <p th:text="'Phone: ' + ${user.phoneNumber}">Phone: 1234567890</p>
-    <p th:text="'Weight: ' + ${user.weight} + ' kg'">Weight: 70 kg</p>
-    <p th:text="'Height: ' + ${user.height} + ' cm'">Height: 180 cm</p>
+    <h1 th:text="${user.fname + ' ' + user.sname}"></h1>
+    <!-- Email -->
+    <p th:text="'Email: ' + ${user.email}"></p>
+    <!-- Phone number -->
+    <p th:text="'Phone: ' + ${user.phoneNumber}"></p>
+    <!-- Weight -->
+    <p th:text="'Weight: ' + ${user.weight} + ' kg'"></p>
+    <!-- Height -->
+    <p th:text="'Height: ' + ${user.height} + ' cm'"></p>
+    <!-- Age -->
     <p th:text="'Age: ' + ${user.age}">Age: 25</p>
-    <p th:text="'Gender: ' + (${user.gender} == 0 ? 'Male' : 'Female')">Gender: Male</p>
+    <!-- Gender -->
+    <p th:text="'Gender: ' + (${user.gender} == 0 ? 'Male' : 'Female')"></p>
+    <!-- Activity Level -->
     <p>
         Activity Level:
         <span th:switch="${user.activityLevel}">
@@ -192,6 +228,7 @@
             <span th:case="4">Extra Active</span>
         </span>
     </p>
+    <!-- Goal -->
     <p>
         Goal:
         <span th:switch="${user.goal}">
@@ -201,11 +238,20 @@
             <span th:case="3">Maintain Weight</span>
         </span>
     </p>
+    <!-- Daily calorie intake goal -->
+    <p th:text="'Daily calorie intake goal: ' + ${dailyCalories} + ' kcal/day'"></p>
+    <!-- Subscription -->
+    <p th:text="'Subscription: ' + ${user.subscription}"></p>
+    <!-- Delete profile form -->
     <form th:action="@{/user/delete}" method="post" onsubmit="return confirm('Are you sure you want to delete your profile? This action cannot be undone.')">
-        <!-- Hidden input field to pass the email value -->
+        <!-- Hidden field for email -->
         <input type="hidden" name="email" th:value="${user.email}" />
+        <!-- Delete profile button -->
         <button class="delete-button" type="submit">Delete Profile</button>
     </form>
+    <!-- Edit profile button -->
+    <a th:href="@{/user/edit/{email}(email=${user.email})}" class="edit-button">Edit Profile</a>
 </div>
 </body>
 </html>
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(239,249,240,255);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Adjust as needed */
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"]{
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        select {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: white;
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            margin-top: 10px;
+            background-color: rgba(69, 160, 80, 0.76);
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .redirect-button {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .redirect-button a {
+            padding: 12px 20px; /* Adjusted padding to match Log ind button */
+            background-color: rgba(0, 123, 255, 0.74);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            text-decoration: none; /* Remove underline */
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box; /* Include padding in the width calculation */
+        }
+
+        .redirect-button a:hover {
+            background-color: #016edd;
+        }
+
+        .activity-level label {
+            display: inline-block;
+            margin-right: 20px; /* Adjust spacing between radio buttons */
+            margin-bottom: 20px;
+        }
+
+        .Goals label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .subscription-display {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit User</h1>
+
+<div class="container">
+    <form th:action="@{'/user/edit/' + ${user.email}}" th:object="${user}" method="post">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" th:field="*{fname}" required/>
+
+        <label for="sname">Last Name:</label>
+        <input type="text" id="sname" th:field="*{sname}" required/>
+
+        <input type="hidden" id="password" th:field="*{password}" th:value="*{password}" />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required/>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" required/>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" th:field="*{weight}" min="2" max="650" required/>
+
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" th:field="*{height}" min="53" max="280" required/>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" th:field="*{age}" min="12" max="125" required/>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" th:field="*{gender}">
+            <option th:value="0" th:text="Male"></option>
+            <option th:value="1" th:text="Female"></option>
+        </select>
+
+
+        <button type="submit">Update User</button>
+        <div class="redirect-button">
+            <a href="/user/homepage">Back to Homepage</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
