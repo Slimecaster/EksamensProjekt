@@ -101,6 +101,7 @@ public class Usecase {
         }
         else if (myUser.getActivityLevel()==2) {
             return calculateBMR(email)*1.7;
+
         }
         else if (myUser.getActivityLevel()==3) {
             return calculateBMR(email)*1.9;
