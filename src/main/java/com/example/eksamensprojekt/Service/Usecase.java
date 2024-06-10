@@ -5,6 +5,7 @@ import com.example.eksamensprojekt.Model.Ingredient;
 import com.example.eksamensprojekt.Model.Recipe;
 import com.example.eksamensprojekt.Repository.DBcontroller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import com.example.eksamensprojekt.Model.MyUser;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class Usecase {
 
     @Autowired
-    private DBcontroller dbController;
+    private DBcontroller dbController=new DBcontroller(new JdbcTemplate());
     private MyUser myUser;
     private Recipe recipe;
     private Ingredient ingredient;
@@ -25,35 +26,27 @@ public class Usecase {
     public MyUser createUpdateUser(MyUser myUser){
         return dbController.createUpdateUser(myUser);
     }
-
     public void deleteUserByEmail(String email){
         dbController.deleteUserByEmail(email);
     }
-
     public Optional<MyUser> findUserByEmail(String email) {
         return dbController.findUserByEmail(email);
     }
-
     public Ingredient createUpdateIngredient(Ingredient ingredient){
         return dbController.createUpdateIngredient(ingredient);
     }
-
     public void deleteIngredientById(Long ingredientId){
         dbController.deleteIngredientById(ingredientId);
     }
-
     public Dish createUpdateDish(Dish dish){
         return dbController.createUpdateDish(dish);
     }
-
     public void deleteDishById(Long dishId){
         dbController.deleteDishById(dishId);
     }
-
     public List<Dish> findAllDishes(){
         return dbController.findAllDishes();
     }
-
     public List<Recipe> show21Recipes(){
         //denne her er ikke færdig i sql
         return dbController.show21Recipes();
@@ -61,24 +54,19 @@ public class Usecase {
     public Optional<Recipe> findRecipeById(Long recipeId){
         return dbController.findRecipeById(recipeId);
     }
-
     public Recipe createUpdateRecipe(Recipe recipe){
         return dbController.createUpdateRecipe(recipe);
     }
-
     public void deleteRecipeById(Long recipeId){
         dbController.deleteRecipeById(recipeId);
     }
-
     public List<Recipe> findAllRecipes(){
         return dbController.findAllRecipes();
     }
-
     public List<Recipe> findFavoriteRecipes(){
         //denne her er ikke færdig i sql
         return dbController.findFavoriteRecipes();
     }
-
     /**
      * Calls the findUserByEmail to find a myUser by their email and calculates the myUsers BMR
      * @param email the email of the myUser object that will get their BMR calculated
@@ -109,16 +97,16 @@ public class Usecase {
             return calculateBMR(email)*1.2;
         }
         else if (myUser.getActivityLevel()==1) {
-            return calculateBMR(email)*1.375;
+            return calculateBMR(email)*1.5;
         }
         else if (myUser.getActivityLevel()==2) {
-            return calculateBMR(email)*1.55;
+            return calculateBMR(email)*1.7;
         }
         else if (myUser.getActivityLevel()==3) {
-            return calculateBMR(email)*1.725;
+            return calculateBMR(email)*1.9;
         }
         else if (myUser.getActivityLevel()==4) {
-            return calculateBMR(email)*1.9;
+            return calculateBMR(email)*2.4;
         } return null;
     }
 
